@@ -449,12 +449,25 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
     //replaced querySelectorAll for better performance//
-    var pizzaContainers = document.getElementsByClassName("randomPizzaContainer");
-    var dx = determineDx(pizzaContainers[0], size);
-    var newwidth = (pizzaContainers[0].offsetWidth + dx) + 'px';
-    for (var i = 0; i < pizzaContainers.length; i++) {
-      pizzaContainers[i].style.width = newwidth;
-    }
+    var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
+
+//casch pissas//
+  switch(size) {
+      case "1":
+      newwidth =25;
+      break;
+      case "2":
+      newwidth =33.3;
+      break;
+      case "3":
+      newwidth =50;
+      break;
+      default:
+        console.log("bug in sizeSwitcher");
+  }
+  var len = randomPizzas.length;
+  for (var i = o; i < len; i++){
+    randomPizzas[i].style.width = newWidth + '%';
   }
 
   changePizzaSizes(size);
@@ -503,15 +516,15 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
 //Sets and returns # px,//
-  var strtP = document.body,scrollTop / 1250;
-//calling images by class name for better performance//
-  var items = document.getElementsByClassName('mover');
+  var scrollPosition = document.body.scrollTop / 1250;
+  var itemsLength = window.items.length;
+
   for (var i = 0; i < items.length; i++) {
     // document.body.scrollTop is no longer supported in Chrome.
     //var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;//
 // removed (var phase) in the initialisation of the for loop to prevent it from being created every time the loop is executed (I think).
-  var phase = Math.sin((startP + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  var phase = Math.sin((scrollPosition) + (i % 5));
+    items[i].style.transform = "translateX(" + (100 * phase) + "px)";
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -527,28 +540,16 @@ function updatePositions() {
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
+//generate different # pizza for window size//
+    function numberOfPizzas(){
+      var estimatedRws = Math.round(window.innerHeight / 200);
+      return estimatedRows * 8;
+    }
+
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8; //Changed//
   var s = 256;
-//reduce # pizza on wondow width//
-console.log(window.innerWidth);
-
-  var numPizza = 0;
-  var windowInnerWidth = window.innerWidth;
-      if (windowInnerWidth >= 1200) {
-        numPizzas = 64;
-    } else if (windowInnerWidth >= 992){
-      numPizzas = 48;
-    } else if (windowInnerWidth >= 768){
-      numPizzas = 32;
-    }  else {
-      numPizzas = 16;
-    }
-
- console.log(numPizzas);
-
-
   for (var i = 0; i < numPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -559,5 +560,7 @@ console.log(window.innerWidth);
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.getElementById("#movingPizzas1").appendChild(elem);
   }
-  updatePositions();
+  items = document.getElementsByClassName('mover');
+
+  requestAnimationFrame(updatePositions);
 });

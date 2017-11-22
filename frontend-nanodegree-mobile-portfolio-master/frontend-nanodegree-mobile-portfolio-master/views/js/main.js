@@ -401,7 +401,7 @@ var pizzaElementGenerator = function(i) {
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
-
+};
   // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
     switch(size) {
@@ -419,7 +419,7 @@ var resizePizzas = function(size) {
     }
   }
 
-  changeSliderLabel(size);
+
 
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
@@ -477,7 +477,7 @@ var resizePizzas = function(size) {
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
   var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
   console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
-};
+}
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
@@ -542,15 +542,15 @@ window.addEventListener('scroll', updatePositions);
 
 //generate different # pizza for window size//
     function numberOfPizzas(){
-      var estimatedRws = Math.round(window.innerHeight / 200);
+      var estimatedRows = Math.round(window.innerHeight / 200);
       return estimatedRows * 8;
     }
 
 // Generates the sliding pizzas when the page loads.
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function(){
   var cols = 8; //Changed//
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < numberOfPizzas(); i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -558,8 +558,9 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.getElementById("#movingPizzas1").appendChild(elem);
+    document.getElementById("#movingPizzas1");
   }
+
   items = document.getElementsByClassName('mover');
 
   requestAnimationFrame(updatePositions);

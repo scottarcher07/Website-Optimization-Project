@@ -528,12 +528,11 @@ function updatePositions() {
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
     // document.body.scrollTop is no longer supported in Chrome.
-    // per suggestion in feedback- changed Declaring the phase variable (var phase;) in the initialisation of the for loop will prevent it from being created every time the loop is executed.//
-    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    // removed per required suggestion not required//
-    var phase = math.sin(scrollTop / 1250);
-    for (var i = 0, len = items.length, phase; i < len; i++) {
-      phase = math.sin(scrollTop + i % 5);
+   // simplified per suggestion by removing (var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;)// 
+ 
+    //added below to simplify per suggestion and corrected scrollTop divided by 1250//
+    for (var i = 0, phase, len = items.length; i < len; i++) {
+    phase = Math.sin(scrollTop / 1250 + i % 5);
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 }

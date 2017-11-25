@@ -6,7 +6,7 @@ Getting started:
 * NPM package http server (npm install-i http-server)
 * Invoke [http-server] form the project
 
-#### Optimized Page Speed Scores by:
+#### Optimized Page Speed Scores to 96 for Mobile and 98 Desktop and an FPS average of 58-60 by:
 * Minified CSS and js files
 * Inline style.css in index.html
 * Added async to js and moved down

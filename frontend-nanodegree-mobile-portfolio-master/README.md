@@ -19,7 +19,10 @@ Getting started:
 * Created a local variable to save [document.getElementsByClassName('randomPizzaContainer') outside the loop (e.g. var container = document.getElementsByClassName('randomPizzaContainer'))], so the DOM is not explicitly touched in every iteration
 * Declared the [pizzaDiv] outside the loop on only 1 DOM call is made
 * Declared the phase variable [var phase;] in the initialisation of the for loop will prevent it from being created every time the loop is executed 
-* Declared the elem variable [var elem;] in the initialisation of the for-loop will prevent it from being created every time the loop is executed 
+* Declared the elem variable [var elem;] in the initialisation of the for-loop will prevent it from being created every time the loop is executed
+* Declared the elem variable (var elem;) in the initialisation of the for-loop will prevent it from being created every time the loop is 
+* Moved this (line 564 [document.getElementById("movingPizzas1").appendChild(elem);], DOM call outside the for statement and save it into a local variablle
+
 
 
 ### References used:

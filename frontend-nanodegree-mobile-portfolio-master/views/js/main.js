@@ -401,7 +401,7 @@ var pizzaElementGenerator = function(i) {
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
-
+};
   // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
     switch(size) {
@@ -419,7 +419,7 @@ var resizePizzas = function(size) {
     }
   }
 
-  changeSliderLabel(size);
+
 
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
@@ -477,7 +477,7 @@ var resizePizzas = function(size) {
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
   var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
   console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
-};
+}
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
@@ -511,24 +511,22 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
-function updatePositions() {
+
+    function updatePositions() {
   frame++;
-  window.performance.mark("mark_start_frame");
+    window.performance.mark("mark_start_frame");
 
-//Sets and returns # px,//
-  var scrollPosition = document.body.scrollTop / 1250;
-  var itemsLength = window.items.length;
+    var scrollPosition = document.body.scrollTop / 1250;
+    var itemsLength = window.items.length;
 
-  for (var i = 0; i < items.length; i++) {
-    // document.body.scrollTop is no longer supported in Chrome.
-    //var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;//
-// removed (var phase) in the initialisation of the for loop to prevent it from being created every time the loop is executed (I think).
-  var phase = Math.sin((scrollPosition) + (i % 5));
-    items[i].style.transform = "translateX(" + (100 * phase) + "px)";
-  }
+    for (var i = 0; i < items.length; i++) {
+    var phase = Math.sin((scrollPosition) + (i % 5));
+      items[i].style.transform = "translateX(" + (100 * phase) + "px)";
+    }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
+
   window.performance.mark("mark_end_frame");
   window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
   if (frame % 10 === 0) {
@@ -542,24 +540,26 @@ window.addEventListener('scroll', updatePositions);
 
 //generate different # pizza for window size//
     function numberOfPizzas(){
-      var estimatedRws = Math.round(window.innerHeight / 200);
+      var estimatedRows = Math.round(window.innerHeight / 200);
       return estimatedRows * 8;
     }
 
 // Generates the sliding pizzas when the page loads.
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function(){
   var cols = 8; //Changed//
   var s = 256;
-  for (var i = 0; i < numPizzas; i++) {
+  for (var i = 0; i < numberOfPizzas(); i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
+    elem.style.left = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.getElementById("#movingPizzas1").appendChild(elem);
   }
+
+
   items = document.getElementsByClassName('mover');
 
   requestAnimationFrame(updatePositions);

@@ -426,7 +426,7 @@ var resizePizzas = function(size) {
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
     var oldWidth = elem.offsetWidth;
-    var windowWidth = document.getElementById("#randomPizzas").offsetWidth;
+    var windowWidth = document.getElementById("randomPizzas").offsetWidth;
     var oldSize = oldWidth / windowWidth;
 
     // Changes the slider value to a percent width
@@ -457,7 +457,7 @@ var resizePizzas = function(size) {
 
       //Changed pizza sizes per required feedback//
 
-      swithch(size) {
+      switch(size) {
         case "1":
         newWidth = 25;
         break;
@@ -530,9 +530,10 @@ function updatePositions() {
     // document.body.scrollTop is no longer supported in Chrome.
     // per suggestion in feedback- changed Declaring the phase variable (var phase;) in the initialisation of the for loop will prevent it from being created every time the loop is executed.//
     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    var phase = Math.sin((scrollTop / 1250);
+    // removed per required suggestion not required//
+    var phase = math.sin(scrollTop / 1250);
     for (var i = 0, len = items.length, phase; i < len; i++) {
-      phase = math.sin(top + i % 5);
+      phase = math.sin(scrollTop + i % 5);
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 }
@@ -554,14 +555,15 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   for (var i = 0; i < 24; i++) {
-    var elem = document.createElement('img');
+    elem = document.createElement('img'); //per suggestion- declering the elm var (var elm;) in the initialisation of the for-loop prevents it from being created every time the loop is executed//
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.getElementById("movingPizzas1").appendChild(elem);
+    var movingPizzas = document.getElementById("movingPizzas1"); //per suggestion moved DOM call outside the (for) statement//
+     movingPizzas.appendChild(elem);
   }
   updatePositions();
 });

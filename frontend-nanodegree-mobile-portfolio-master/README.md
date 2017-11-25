@@ -3,7 +3,7 @@
 Getting started:
 * Clone the reposittory and launch an HTTP server. This can be acheived by:
 
-* NPM package http server [npm install-i http-server]
+* NPM package http server (npm install-i http-server)
 * Invoke [http-server] form the project
 
 #### Optimized Page Speed Scores by:

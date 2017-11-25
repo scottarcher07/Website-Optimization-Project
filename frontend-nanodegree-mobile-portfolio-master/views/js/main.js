@@ -512,7 +512,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   var numberOfEntries = times.length;
   var sum = 0;
   for (var i = numberOfEntries - 1; i > numberOfEntries - 11; i--) {
-    sum = sum + times[i].duration;
+    sum = sum + times[0].duration;
   }
   console.log("Average scripting time to generate last 10 frames: " + sum / 10 + "ms");
 }
@@ -531,11 +531,12 @@ function updatePositions() {
   var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   for (var i = 0, phase, len = items.length; i < len; i++) {
     phase = Math.sin(scrollTop / 1250 + i % 5);
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';  
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 }
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
+  window.performance.mark("mark_start_frame");
   window.performance.mark("mark_end_frame");
   window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
   if (frame % 10 === 0) {

@@ -524,16 +524,14 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
-  var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
     // document.body.scrollTop is no longer supported in Chrome.
-   // simplified per suggestion by removing (var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;)// 
- 
+
     //added below to simplify per suggestion and corrected scrollTop divided by 1250//
-    for (var i = 0, phase, len = items.length; i < len; i++) {
+  var items = document.querySelectorAll('.mover');
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  for (var i = 0, phase, len = items.length; i < len; i++) {
     phase = Math.sin(scrollTop / 1250 + i % 5);
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';  
   }
 }
   // User Timing API to the rescue again. Seriously, it's worth learning.

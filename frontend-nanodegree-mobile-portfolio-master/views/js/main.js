@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   for (var i = 0; i < 24; i++) {
-    elem = document.createElement('img'); //per suggestion- declering the elm var (var elm;) in the initialisation of the for-loop prevents it from being created every time the loop is executed//
+    elem = document.createElement('img'); 
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
